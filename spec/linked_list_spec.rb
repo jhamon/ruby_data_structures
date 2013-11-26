@@ -46,31 +46,34 @@ describe "Linked lists" do
     expect(linked_list.length).to eq(0)
   end
 
-  before(:each) do
-    linked_list << 5
-    linked_list << 4
-    linked_list << :hello
-    linked_list << :world
-  end
+  context "after adding some elements to the Linked List" do
 
-  describe "#push" do
-    it "pushing should increase the list length" do
-      expect(linked_list.length).to eq(4)
+    before(:each) do
+      linked_list << 5
+      linked_list << 4
+      linked_list << :hello
+      linked_list << :world
+    end
+  
+    describe "#push" do
+      it "pushing should increase the list length" do
+        expect(linked_list.length).to eq(4)
+      end
+
+      it "pushing should add elements to the end of the linked list" do
+        expect(linked_list.to_s).to eq("[5, 4, :hello, :world]")
+      end
     end
 
-    it "pushing should add elements to the end of the linked list" do
-      expect(linked_list.to_s).to eq("[5, 4, :hello, :world]")
-    end
-  end
+    describe "#pop" do
+      it "decreases the list length" do
+        linked_list.pop
+        expect(linked_list.length).to eq(3)
+      end
 
-  describe "#pop" do
-    it "decreases the list length" do
-      linked_list.pop
-      expect(linked_list.length).to eq(3)
-    end
-
-    it "returns the last element" do
-      expect(linked_list.pop).to eq(:world)
+      it "returns the last element" do
+        expect(linked_list.pop).to eq(:world)
+      end
     end
   end
 end
