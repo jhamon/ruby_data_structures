@@ -86,7 +86,7 @@ describe "Linked lists" do
     end
 
     describe "setting values with #[]=" do
-      it "sets the nth element" do
+      it "sets the node value at that index position" do
         linked_list[2] = :another_value
         expect(linked_list[2]).to eq(:another_value)
       end
@@ -98,6 +98,8 @@ describe "Linked lists" do
     end
 
     describe "inserting values with #insert(index, value)" do
+      it { should respond_to(:insert) }
+
       it "adds a new node to the linked list" do
         linked_list.insert(2,:another_value)
         expect(linked_list.length).to eq(5)
