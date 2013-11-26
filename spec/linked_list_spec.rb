@@ -40,7 +40,6 @@ describe "Linked lists" do
   it { should respond_to(:<<) }
   it { should respond_to(:push) }
   it { should respond_to(:pop) }
-  it { should respond_to(:root) }
 
   it "should begin with length zero" do
     expect(linked_list.length).to eq(0)
