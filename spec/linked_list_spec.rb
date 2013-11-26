@@ -74,5 +74,39 @@ describe "Linked lists" do
         expect(linked_list.pop).to eq(:world)
       end
     end
+
+    describe "indexing into linked list with #[]" do
+      it "returns the nth element" do
+        expect(linked_list[2]).to eq(:hello)
+      end
+
+      it "returns nil if you ask for an invalid index" do
+        expect(linked_list[10]).to be_nil
+      end
+    end
+
+    describe "setting values with #[]=" do
+      it "sets the nth element" do
+        linked_list[2] = :another_value
+        expect(linked_list[2]).to eq(:another_value)
+      end
+
+      it "does not allow you to set values outside the current list size" do
+        expect(linked_list[10]=:out_of_bounds).to be_nil
+        expect(linked_list.length).to eq(4) 
+      end
+    end
+
+    describe "inserting values with #insert(index, value)" do
+      it "adds a new node to the linked list" do
+        linked_list.insert(2,:another_value)
+        expect(linked_list.length).to eq(5)
+      end
+
+      it "adds a new value at the index position specified" do
+        linked_list.insert(2, :another_value)
+        expect(linked_list[3]).to eq(:another_value)
+      end
+    end
   end
 end
