@@ -1,23 +1,5 @@
-class Stack
-  def initialize
-    @stack = []
-  end
+require 'linked_list.rb'
 
-  def length
-    @stack.length
-  end
+class Stack < LinkedList
   alias_method :size, :length
-
-  def push element
-    @stack << element
-  end
-  alias_method :<<, :push
-
-  def pop
-    @stack.pop
-  end
-
-  def empty?
-    @stack.empty?
-  end
 end
