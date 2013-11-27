@@ -100,6 +100,7 @@ describe "Linked lists" do
 
       it "does nothing if given an index that is too large" do
         expect(linked_list.delete(100)).to eq(nil)
+        expect(linked_list.length).to eq(4)
       end
     end
   end

@@ -31,6 +31,21 @@ class LinkedList
     self
   end
 
+  def delete(index)
+    return nil unless check_valid_index(index)
+    if index == 0
+      deleted_value = @head.value
+      @head = @head.pointer
+    else
+      node = find_node_by_index(index-1)
+      deleted_value = node.pointer.value
+      node.pointer = node.pointer.pointer
+    end
+
+    @length -= 1
+    deleted_value
+  end
+
   def [](index)
     node = find_node_by_index(index)
     !!node ? node.value : nil
@@ -58,8 +73,14 @@ class LinkedList
   end
 
   private
+
+    def check_valid_index(n)
+      return false if n < 0 || n >= @length
+      return true
+    end
+
     def find_node_by_index(n)
-      return nil if n < 0 || n >= @length
+      return nil unless check_valid_index(n)
 
       node = @head
       n.times do 
