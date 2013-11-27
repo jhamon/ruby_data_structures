@@ -76,8 +76,9 @@ describe "Linked lists" do
     end
 
     describe "indexing into linked list with #[]" do
-      it "returns the nth element" do
-        expect(linked_list[2]).to eq(:hello)
+      it "is zero indexed" do
+        expect(linked_list[0]).to eq(5)
+        expect(linked_list[1]).to eq(4)
       end
 
       it "returns nil if you ask for an invalid index" do
