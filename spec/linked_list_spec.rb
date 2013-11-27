@@ -80,5 +80,18 @@ describe "Linked lists" do
         expect(linked_list[3]).to eq(:another_value)
       end
     end
+
+    describe "deleting values with #delete(index)" do
+      it { should respond_to(:delete) }
+
+      it "decreases the length by 1" do
+        linked_list.delete(2)
+        expect(linked_list.length).to eq(3)
+      end
+
+      it "returns the value of the deleted node" do
+        expect(linked_list.delete(2)).to eq(4)
+      end
+    end
   end
 end
