@@ -1,7 +1,16 @@
 require 'nodes.rb'
 
 class LinkedList
+  include Enumerable
   attr_reader :length
+
+  def each(&blk)
+    node = @head
+    until node.is_a?(SentinelNode)
+      blk.call(node.value)
+      node = node.pointer
+    end
+  end
 
   def initialize
     @head = SentinelNode.new
@@ -78,7 +87,6 @@ class LinkedList
   end
 
   private
-
     def check_valid_index(n)
       return false if n < 0 || n >= @length
       return true
@@ -95,4 +103,3 @@ class LinkedList
       node
     end
 end
-
