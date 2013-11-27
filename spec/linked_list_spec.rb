@@ -44,10 +44,10 @@ describe "Linked lists" do
       end
     end
 
-    describe "indexing into linked list with #[]" do
-      it "is zero indexed" do
-        expect(linked_list[0]).to eq(5)
-        expect(linked_list[1]).to eq(4)
+    describe "#[]" do
+      it "is zero indexed from the current list head" do
+        expect(linked_list[0]).to eq(:world)
+        expect(linked_list[1]).to eq(:hello)
       end
 
       it "returns nil if you ask for an invalid index" do
