@@ -62,7 +62,7 @@ describe "Linked lists" do
       end
 
       it "does not allow you to set values outside the current list size" do
-        expect(linked_list[10]=:out_of_bounds).to be_nil
+        linked_list[10]=:out_of_bounds
         expect(linked_list.length).to eq(4) 
       end
     end
