@@ -92,6 +92,15 @@ describe "Linked lists" do
       it "returns the value of the deleted node" do
         expect(linked_list.delete(2)).to eq(4)
       end
+
+      it "correctly handles index=0" do
+        expect(linked_list.delete(0)).to eq(:world)
+        expect(linked_list.length).to eq(3)
+      end
+
+      it "does nothing if given an index that is too large" do
+        expect(linked_list.delete(100)).to eq(nil)
+      end
     end
   end
 end
