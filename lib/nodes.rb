@@ -17,12 +17,17 @@ class SentinelNode < SinglyLinkedNode
 end
 
 class LinkedListNode < SinglyLinkedNode
-  attr_writer :value, :pointer
+  attr_writer :value
 
   def initialize(value, parent_node)
     @value = value
     raise "Invalid node reference" unless parent_node.is_a?(Node)
     @pointer = parent_node
+  end
+
+  def pointer=(node)
+    raise ArgumentError unless node.is_a?(Node)
+    @pointer = node
   end
 end
 
