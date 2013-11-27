@@ -33,5 +33,9 @@ describe "LinkedListNode" do
   it "should maintain a pointer to another node" do
     expect(node.pointer).to be_a(Node)
   end
+
+  it "should not allow a nil pointer" do
+    expect { node.pointer = nil }.to raise_error
+  end
 end
 
