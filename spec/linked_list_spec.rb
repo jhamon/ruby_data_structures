@@ -42,6 +42,11 @@ describe "Linked lists" do
       it "returns the last element" do
         expect(linked_list.pop).to eq(:world)
       end
+
+      it "returns nil if you try to pop from an empty list" do
+        linked_list = LinkedList.new
+        expect(linked_list.pop).to be_nil
+      end
     end
 
     describe "#[]" do

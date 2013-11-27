@@ -16,6 +16,7 @@ class LinkedList
   alias_method :push, :<<
 
   def pop
+    return nil if empty?
     old_node, @head = @head, @head.pointer
     @length -= 1
     old_node.value
@@ -70,6 +71,10 @@ class LinkedList
   def to_s
     values = to_a
     values.to_s 
+  end
+
+  def empty?
+    @head.is_a?(SentinelNode)
   end
 
   private
