@@ -39,7 +39,7 @@ describe "Stack" do
         expect(stack.length).to eq(2)
       end
 
-      it "returns the last element pushed (FIFO)" do
+      it "returns the last element pushed (FILO)" do
         expect(stack.pop).to eq(1)
       end
     end
