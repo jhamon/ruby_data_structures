@@ -54,4 +54,25 @@ describe "Stack" do
       end
     end
   end
+
+  context "when holding numerical values" do
+    it "keeps track of the maximum value" do
+      stack << 5
+      stack << 4
+      expect(stack.max).to be(5)
+    end
+
+    it "updates the max even when the current max is removed" do
+      stack << 5
+      stack << 4
+      stack << 10
+      expect(stack.max).to be(10)
+      stack.pop
+      expect(stack.max).to be(5)
+      stack.pop
+      expect(stack.max).to be(5)
+      stack.pop
+      expect(stack.max).to be_nil
+    end
+  end
 end
