@@ -187,3 +187,47 @@ describe "MaxHeap" do
     end
   end
 end
+
+describe "MinHeap" do
+  subject(:minheap) { MinHeap.new [4,3,1,6,7,8,10,0,5] }
+
+  it "places the smallest value at the root position" do
+    expect(minheap[0]).to eq(0)
+  end
+
+  it "is a valid min-heap" do
+    expect(valid_min_heap?(minheap.heap)).to be_true
+  end
+
+  it "builds a min-heap from a random array of integers" do
+    some_integers = Array.new(50) { rand(100) }
+    minheap = MinHeap.new some_integers
+    expect(valid_min_heap?(minheap.heap)).to be_true
+  end
+
+  it "works properly with negative numbers too" do
+    some_integers = Array.new(50) { -1 * rand(100) }
+    minheap = MinHeap.new some_integers
+    expect(valid_min_heap?(minheap.heap)).to be_true
+  end
+
+  describe "#extract_min" do
+    it "returns the smallest value in the heap"
+    it "decreases the heap size by one" 
+    it "returns nil when called on an empty heap"
+    it "preserves the min-heap property"
+  end
+
+  describe "#delete_at" do
+    it "returns the deleted element"
+    it "decreases the heap size by one"
+    it "maintains the min-heap property"
+  end
+
+  describe "#<<" do
+    it "increases the heap size by one"
+    it "maintains the heap property"
+    it "raises an error if a non-number is passed"
+  end
+
+end
