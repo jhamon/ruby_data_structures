@@ -14,7 +14,7 @@ def valid_max_heap?(arr)
   valid.all? 
 end
 
-def valid_max_heap?(arr)
+def valid_min_heap?(arr)
   valid = []
   (arr.length/2..0).to_a.each_index do |i|
     if i.zero?
@@ -143,6 +143,47 @@ describe "MaxHeap" do
     it "returns nil when called on an empty heap" do
       mh = MaxHeap.new
       expect(mh.extract_max).to be_nil
+    end
+  end
+
+  describe "#max" do
+    it "gives the current max "do
+      expect(maxheap.max).to eq(10)
+    end
+
+    it "gives nil when called on an empty max heap" do
+      mh = MaxHeap.new
+      expect(mh.max).to be_nil
+    end
+  end
+
+  describe "#[]=" do
+    it "changes the value stored at an index" do
+      original = maxheap[3]
+      maxheap[3] = 500
+      expect(maxheap[3]).not_to eq(original)
+    end
+
+    it "preserves the max-heap property" do
+      maxheap[6] = 500
+      expect(valid_max_heap?(maxheap.heap)).to be_true
+    end
+  end
+
+  describe "<<" do
+    it "increases the heap size" do
+      original_length = maxheap.length
+      maxheap << 100
+      expect(maxheap.length).to eq(original_length + 1)
+    end
+
+    it "maintains the max-heap property" do
+      maxheap << 100
+      expect(valid_max_heap?(maxheap)).to be_true
+      maxheap << 50
+      expect(valid_max_heap?(maxheap)).to be_true
+      maxheap << -50
+      expect(valid_max_heap?(maxheap)).to be_true
     end
   end
 end
