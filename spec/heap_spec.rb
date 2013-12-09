@@ -198,22 +198,79 @@ describe "MinHeap" do
   end
 
   describe "#extract_min" do
-    it "returns the smallest value in the heap"
-    it "decreases the heap size by one" 
-    it "returns nil when called on an empty heap"
-    it "preserves the min-heap property"
+    it "returns the smallest value in the heap" do
+      min_item = minheap.heap.min
+      expect(minheap.extract_min).to eq(min_item)
+    end
+
+    it "decreases the heap size by one" do
+      start_length = minheap.length
+      minheap.extract_min
+      expect(minheap.length).to eq(start_length-1)
+    end
+
+    it "returns nil when called on an empty heap" do
+      mh = MinHeap.new
+      expect(mh.extract_min).to be_nil
+    end
+
+    it "preserves the min-heap property" do
+      minheap.extract_min
+      expect(valid_min_heap?(minheap)).to be_true
+    end
   end
 
   describe "#delete_at" do
-    it "returns the deleted element"
-    it "decreases the heap size by one"
-    it "maintains the min-heap property"
+    it "returns the deleted element" do
+      expect(minheap.delete_at(0)).to eq(0)
+    end
+
+    it "decreases the heap size by one" do
+      start_length = minheap.length
+      minheap.delete_at(3)
+      expect(minheap.length).to eq(start_length-1)
+    end
+
+    it "maintains the min-heap property" do
+      minheap.delete_at(2)
+      expect(valid_min_heap?(minheap.heap)).to be_true
+      minheap.delete_at(6)
+      expect(valid_min_heap?(minheap.heap)).to be_true
+    end
   end
 
   describe "#<<" do
-    it "increases the heap size by one"
-    it "maintains the heap property"
-    it "raises an error if a non-number is passed"
+    it "increases the heap size by one" do
+      start_length = minheap.length
+      minheap << 5
+      expect(minheap.length).to eq(start_length+1)
+    end
+    
+    it "maintains the heap property" do
+      minheap << -1000
+      expect(valid_min_heap?(minheap.heap)).to be_true
+    end
+
+    it "raises an error if a non-number is passed" do
+      expect { minheap << "hello" }.to raise_error
+    end
+  end
+
+  describe "#min" do
+    it "returns the current min value" do
+      expect(minheap.min).to eq(0)
+    end
+
+    it "does not modify the heap size" do
+      start_length = minheap.length
+      minheap.min
+      expect(minheap.length).to eq(start_length)
+    end
+
+    it "returns nil on an empty heap" do
+      mh = MinHeap.new
+      expect(mh.min).to be_nil
+    end
   end
 
 end
