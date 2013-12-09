@@ -3,7 +3,7 @@ require 'heap.rb'
 
 def valid_max_heap?(arr)
   valid = []
-  (arr.length/2..0).to_a.each_index do |i|
+  (arr.length/2-1).downto(0).each do |i|
     if i.zero?
       valid << (arr[0] >= arr[1])
       valid << (arr[0] >= arr[2])
@@ -16,7 +16,7 @@ end
 
 def valid_min_heap?(arr)
   valid = []
-  (arr.length/2..0).to_a.each_index do |i|
+  (arr.length/2-1).downto(0).each do |i|
     if i.zero?
       valid << (arr[0] <= arr[1])
       valid << (arr[0] <= arr[2])
@@ -82,11 +82,6 @@ describe "HeapBase" do
     end
   end
 
-  describe "#[]=" do
-    it "can be assigned to like an" do
-      expect(heap[3]=5).to eq(5)
-    end
-  end
 end
 
 describe "MaxHeap" do
@@ -137,6 +132,7 @@ describe "MaxHeap" do
 
     it "retains the max-heap property" do
       maxheap.extract_max
+      p maxheap.heap
       expect(valid_max_heap?(maxheap.heap)).to be_true
     end
 
@@ -154,19 +150,6 @@ describe "MaxHeap" do
     it "gives nil when called on an empty max heap" do
       mh = MaxHeap.new
       expect(mh.max).to be_nil
-    end
-  end
-
-  describe "#[]=" do
-    it "changes the value stored at an index" do
-      original = maxheap[3]
-      maxheap[3] = 500
-      expect(maxheap[3]).not_to eq(original)
-    end
-
-    it "preserves the max-heap property" do
-      maxheap[6] = 500
-      expect(valid_max_heap?(maxheap.heap)).to be_true
     end
   end
 
@@ -192,7 +175,7 @@ describe "MinHeap" do
   subject(:minheap) { MinHeap.new [4,3,1,6,7,8,10,0,5] }
 
   it "places the smallest value at the root position" do
-    expect(minheap[0]).to eq(0)
+    expect(minheap[0]).to eq(minheap.heap.min)
   end
 
   it "is a valid min-heap" do
@@ -209,6 +192,7 @@ describe "MinHeap" do
     some_integers = Array.new(50) { -1 * rand(100) }
     minheap = MinHeap.new some_integers
     expect(valid_min_heap?(minheap.heap)).to be_true
+    expect(minheap.heap[0]).to eq(minheap.heap.min)
   end
 
   describe "#extract_min" do
