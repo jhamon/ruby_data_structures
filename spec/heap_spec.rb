@@ -1,5 +1,7 @@
 require 'rspec'
 require 'heap.rb'
+require 'min_heap.rb'
+require 'max_heap.rb'
 
 def valid_max_heap?(arr)
   valid = []
@@ -183,13 +185,13 @@ describe "MinHeap" do
   end
 
   it "builds a min-heap from a random array of integers" do
-    some_integers = Array.new(50) { rand(100) }
+    some_integers = Array.new(10) { rand(100) }
     minheap = MinHeap.new some_integers
     expect(valid_min_heap?(minheap.heap)).to be_true
   end
 
   it "works properly with negative numbers too" do
-    some_integers = Array.new(50) { -1 * rand(100) }
+    some_integers = Array.new(10) { -1 * rand(100) }
     minheap = MinHeap.new some_integers
     expect(valid_min_heap?(minheap.heap)).to be_true
     expect(minheap.heap[0]).to eq(minheap.heap.min)
