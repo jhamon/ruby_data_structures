@@ -15,18 +15,30 @@ class BinaryTreeNode
     @value = options[:value]
   end
 
-  def insert_left_child(child=BinaryTreeNode.new)
-    raise UnknownChildTypeError if !child.is_a?(BinaryTreeNode)
-    raise ExcessChildError if !@left_child.nil?
-    child.parent = self
-    @left_child = child
+  def self.define_insertion_methods(*child_positions)
+    child_positions.each do |position|
+      define_method("insert_#{position}_child") do |child|
+        instance_var = "@#{position}_child"
+        raise UnknownChildTypeError if !child.is_a?(BinaryTreeNode)
+        raise ExcessChildError if !self.instance_variable_get(instance_var).nil?
+        child.parent = self
+        self.instance_variable_set(instance_var, child)
+      end
+    end
   end
 
-  def insert_right_child(child=BinaryTreeNode.new)
-    raise UnknownChildTypeError if !child.is_a?(BinaryTreeNode)
-    raise ExcessChildError if !@right_child.nil?
-    child.parent = self
-    @right_child = child
+  define_insertion_methods :left, :right
+
+  def pop_left_child
+    left_child = @left_child
+    @left_child = nil
+    left_child
+  end
+
+  def pop_right_child
+    right_child = @right_child
+    @right_child = nil
+    right_child
   end
 
   protected

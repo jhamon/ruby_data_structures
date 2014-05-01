@@ -130,5 +130,43 @@ describe BinaryTreeNode do
       expect(btnode).not_to respond_to(:parent=)
     end
   end
+
+  describe "#pop_right_child" do
+    before(:each) { btnode.insert_right_child( BinaryTreeNode.new ) }
+
+    it "should return the right child" do
+      right = btnode.right_child
+      expect(btnode.pop_right_child).to equal(right)
+    end
+
+    it "should set the right child to nil" do
+      btnode.pop_right_child
+      expect(btnode.right_child).to be_nil
+    end
+
+    it "should return nil if there is no right child" do
+      btnode.pop_right_child
+      expect(btnode.pop_right_child).to be_nil
+    end
+  end
+
+  describe "#pop_left_child" do
+    before(:each) { btnode.insert_left_child( BinaryTreeNode.new ) }
+
+    it "should return the left child" do
+      left = btnode.left_child
+      expect(btnode.pop_left_child).to equal(left)
+    end
+
+    it "should set the left child to nil" do
+      btnode.pop_left_child
+      expect(btnode.left_child).to be_nil
+    end
+
+    it "should return nil if there is no left child" do
+      btnode.pop_left_child
+      expect(btnode.pop_left_child).to be_nil
+    end
+  end
 end
 
