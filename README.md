@@ -13,9 +13,9 @@ can't think of a better way to do that than by implementing them myself.
 
 ## Completed so far
 
-- [Stack](src/stack.rb)
-- [Queue](src/queue.rb)
-- [LinkedList](src/linked_list.rb)
-- [MinHeap](src/min_heap.rb)
-- [MaxHeap](src/max_heap.rb)
-- [HashMap](src/hashmap.rb)
+- [Stack](lib/stack.rb)
+- [Queue](lib/queue.rb)
+- [LinkedList](lib/linked_list.rb)
+- [MinHeap](lib/min_heap.rb)
+- [MaxHeap](lib/max_heap.rb)
+- [HashMap](lib/hashmap.rb)
