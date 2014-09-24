@@ -6,9 +6,9 @@ class Trie
     @root = TrieNode.new("")
   end
 
-  def self.from_array(array)
+  def self.from_array(word_array)
     trie = Trie.new
-    array.each do |word|
+    word_array.each do |word|
       trie.insert(word)
     end
 
@@ -19,14 +19,13 @@ class Trie
     letters = word.split("")
     current_node = root
 
-    letters.each_with_index do |letter, index|
+    letters.each do |letter|
       if current_node.has_child?(letter)
         current_node = current_node[letter]
       else
         @size += 1
-        new_node             = TrieNode.new
-        current_node[letter] = new_node
-        current_node         = new_node
+        current_node[letter] = TrieNode.new
+        current_node         = current_node[letter]
       end
     end
 
@@ -34,10 +33,9 @@ class Trie
   end
 
   def include?(word)
-    letters = word.split("")
     current_node = root
 
-    letters.each_with_index do |letter, index|
+    word.split("").each do |letter|
       if current_node.has_child?(letter)
         current_node = current_node[letter]
       else
@@ -49,10 +47,9 @@ class Trie
   end
 
   def completions_for(word)
-    letters = word.split("")
     current_node = root
 
-    letters.each_with_index do |letter, index|
+    word.split("").each do |letter|
       if current_node.has_child?(letter)
         current_node = current_node[letter]
       else
@@ -60,7 +57,6 @@ class Trie
       end
     end
 
-    # Collect leaves below the current_node
     completions_below_node(current_node).map(&:value)
   end
 
@@ -86,6 +82,7 @@ end
 
 class TrieNode
   attr_accessor :value
+  attr_reader :children
 
   def initialize(value = nil)
     @children = {}
@@ -98,23 +95,19 @@ class TrieNode
     node
   end
 
-  def has_child?(l)
-    children.has_key? l
-  end
-
   def [](letter)
     children[letter]
   end
 
+  def has_child?(letter)
+    children.has_key?(letter)
+  end
+
   def leaf?
-    children.count == 0 && !@value.nil?
+    children.count == 0
   end
 
   def child_nodes
     children.sort.map { |pair| pair[1] }
-  end
-
-  def children
-    @children
   end
 end
